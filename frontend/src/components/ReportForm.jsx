@@ -23,7 +23,8 @@ const ReportForm = () => {
 
     try {
       // Sends a POST request to the backend to submit the report
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/reports`, newReport);
+      // Use the full URL for the API endpoint
+      const response = await axios.post(`http://localhost:5000/api/reports`, newReport);
       setMessage('Report submitted successfully');
       console.log('Report submission response:', response.data);
 
