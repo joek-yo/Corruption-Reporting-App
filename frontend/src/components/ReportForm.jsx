@@ -12,13 +12,25 @@ const ReportForm = () => {
   // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate that all fields are filled in
+    if (!title || !description || !location) {
+      setMessage('Please fill in all the fields');
+      return;
+    }
+
     const newReport = { title, description, location };
 
     try {
       // Sends a POST request to the backend to submit the report
-      const response = await axios.post('http://localhost:5000/api/reports', newReport);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/reports`, newReport);
       setMessage('Report submitted successfully');
       console.log('Report submission response:', response.data);
+
+      // Clear the form after successful submission
+      setTitle('');
+      setDescription('');
+      setLocation('');
     } catch (error) {
       setMessage('Error submitting report');
       console.error('There was an error submitting the report!', error);

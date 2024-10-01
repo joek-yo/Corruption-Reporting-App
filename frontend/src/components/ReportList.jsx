@@ -11,7 +11,7 @@ const ReportList = () => {
     // Fetch reports from the backend
     const fetchReports = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/reports');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports`);
         setReports(response.data); // Set the reports in state
       } catch (error) {
         setError('Error fetching reports');
